@@ -1,16 +1,15 @@
-import type { TimedRedemptionData } from "../ohlc/types.js";
+import type { BatchRedemptionPickingResult, TimedRedemptionData } from "../ohlc/types.js";
 
 
 const RPC_BLOCKS = "https://nd-422-757-666.p2pify.com/0a9d79d93fb2f4a4b1e04695da2b77a7";         
 const RPC_MAINNET = "https://ethereum-mainnet.core.chainstack.com/7541f180988ffa697ec13762ba5d988f"; 
 const SUSDE_REDEMPTION_CONTRACT = "0x9D39A5DE30e57443BfF2A8307A4256c8797A3497";
 const CALL_DATA ="0x4cdad5060000000000000000000000000000000000000000000000000de0b6b3a7640000";
-const DEFAULT_START_BLOCK = 23100000;
 const BATCH_SIZE = 2;     
-const BLOCK_INTERVAL = 100; 
+const BLOCK_INTERVAL = 50; 
 const RPC_TIMEOUT_MS = 30_000;
 
-async function getLatestBlock() : Promise<number> {
+export async function getLatestBlock() : Promise<number> {
     const url = new URL("https://ethereum-mainnet.core.chainstack.com/7541f180988ffa697ec13762ba5d988f");
     const payload = {
         "jsonrpc": "2.0",
@@ -142,9 +141,8 @@ async function processBlockBatch(blocks: number[]): Promise<TimedRedemptionData[
     return Promise.all(tasks);
   }
 
-export async function getRedemptionsData() : Promise<TimedRedemptionData[]> {
+export async function getRedemptionsData(startBlock: number) : Promise<BatchRedemptionPickingResult> {
   const latestBlock = await getLatestBlock();
-  const startBlock = DEFAULT_START_BLOCK;
 
   console.log("Start fetching latest block");
   console.log(`Strating from block ${startBlock}`);
@@ -179,5 +177,9 @@ export async function getRedemptionsData() : Promise<TimedRedemptionData[]> {
     console.log(`Fetched ${total} sUSDe redemption prices`);
   }
 
-  return totalRedemptions;
+  return {
+    startBlock: startBlock,
+    endBlock: latestBlock,
+    redemptionsData: totalRedemptions,
+  };
 }

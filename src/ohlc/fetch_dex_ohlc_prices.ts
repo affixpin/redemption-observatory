@@ -35,7 +35,11 @@ export async function getCurveOhlcData(options: {
     Object.entries(params).forEach(([k, v]) => url.searchParams.set(k, v));
 
     const response = await fetch(url.toString());
-    if (!response.ok) throw new Error(`Failed to fetch: ${response.statusText}`);
+    if (!response.ok) {
+        console.log("params", params);
+        console.log("url", url.toString());
+        throw new Error(`Failed to fetch: ${response.statusText}`);
+    }
 
     const json = await response.json() as {  data: TimedOhlcData[] };
     return json.data;

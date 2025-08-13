@@ -25,3 +25,9 @@ export type DiagramStep = {
     crvUSDToUSDCDex: OhlcData;
     usdeToUSDCDex: OhlcData;
 }
+
+export type BatchRedemptionPickingResult = {
+    startBlock: number;
+    endBlock: number;
+    redemptionsData: TimedRedemptionData[];
+}
