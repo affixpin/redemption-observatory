@@ -5,7 +5,8 @@ export function buildDiagramSteps(
     susdeRedemption: TimedOhlcData[],
     susdeDex: TimedOhlcData[],
     crvusdDex: TimedOhlcData[],
-    usdeDex: TimedOhlcData[]
+    usdeDex: TimedOhlcData[],
+    sUSDeToCrvUSDDex: TimedOhlcData[]
   ): DiagramStep[] {
     const result: DiagramStep[] = [];
   
@@ -28,10 +29,11 @@ export function buildDiagramSteps(
     const dexMap = normalize(susdeDex);
     const crvMap = normalize(crvusdDex);
     const usdeMap = normalize(usdeDex);
+    const sUSDeToCrvUSDDexMap = normalize(sUSDeToCrvUSDDex);
   
     // Get shared timestamps
     const sharedTimestamps = [...redemptionMap.keys()].filter(
-      (ts) => dexMap.has(ts) && crvMap.has(ts) && usdeMap.has(ts)
+      (ts) => dexMap.has(ts) && crvMap.has(ts) && usdeMap.has(ts) && sUSDeToCrvUSDDexMap.has(ts)
     ).sort();
   
     for (const ts of sharedTimestamps) {
@@ -41,6 +43,7 @@ export function buildDiagramSteps(
         sUSDeToUSDCDex: dexMap.get(ts)!,
         crvUSDToUSDCDex: crvMap.get(ts)!,
         usdeToUSDCDex: usdeMap.get(ts)!,
+        sUSDeToCrvUSDDex: sUSDeToCrvUSDDexMap.get(ts)!,
       });
     }
   

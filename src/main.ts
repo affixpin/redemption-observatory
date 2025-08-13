@@ -1,11 +1,11 @@
-import { getcrvUSDToUSDCOhlcData } from "./ohlc/fetch_dex_sUSDe_to_USDC.js";
+import { getcrvUSDToUSDCOhlcData, getSUSDeToCRVUSDOhlcData } from "./ohlc/fetch_dex_sUSDe_to_USDC.js";
 import { getRedemptionsData } from "./redemption/fetch_redemption_prices.js";
 import { getDexUSDeToUSDC } from "./ohlc/fetch_dex_USDe_to_USDC.js";
 import { getRedemptionsUSDeToUSDC } from "./ohlc/fetch_redemption_USDe_to_USDC.js";
 import { getDexSUSDeToUSDC } from "./ohlc/fetch_dex_sUSDe_to_USDC.js";
 import { buildDiagramSteps } from "./utilities/diagrams_utility.js";
 import { getLatestBlock } from "./redemption/fetch_redemption_prices.js";
-import { appendDiagramStepsToCsv } from "./utilities/diagram_steps_csv_writer.js";
+import { appendDiagramStepsToCsv, appendDiagramStepsToDebugCsv } from "./utilities/diagram_steps_csv_writer.js";
 
 const DEFAULT_START_BLOCK = 23101513;
 const THRESHOLD_BLOCKS_BETWEEN_ITERATIONS = 50;
@@ -38,15 +38,18 @@ async function main() {
     const USDeToUSDCDex = await getDexUSDeToUSDC(startTimestamp, endTimestamp);
     const crvUSDToUSDCDex = await getcrvUSDToUSDCOhlcData(startTimestamp, endTimestamp);
     const sUSDeToUSDCDex = await getDexSUSDeToUSDC(startTimestamp, endTimestamp);
+    const sUSDeToCrvUSDDex = await getSUSDeToCRVUSDOhlcData(startTimestamp, endTimestamp);
     const diagramSteps = buildDiagramSteps(
         sUSDeToUSDCRedemption,
         sUSDeToUSDCDex,
         crvUSDToUSDCDex,
-        USDeToUSDCDex
+        USDeToUSDCDex,
+        sUSDeToCrvUSDDex,
       );
 
     console.log("diagramSteps", diagramSteps);
     appendDiagramStepsToCsv(diagramSteps);
+    appendDiagramStepsToDebugCsv(diagramSteps);
     currentBlock = batchRedemptionPickingResult.endBlock + 1;
     await sleep(TICK_RATE_MS);
   }

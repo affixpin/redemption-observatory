@@ -24,6 +24,7 @@ export type DiagramStep = {
     sUSDeToUSDCDex: OhlcData;
     crvUSDToUSDCDex: OhlcData;
     usdeToUSDCDex: OhlcData;
+    sUSDeToCrvUSDDex: OhlcData;
 }
 
 export type BatchRedemptionPickingResult = {

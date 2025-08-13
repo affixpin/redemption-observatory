@@ -2,7 +2,7 @@ import type { TimedOhlcData } from "./types.js";
 import { getCurveOhlcData } from "./fetch_dex_ohlc_prices.js";
 
 
-async function getSUSDeToCRVUSDOhlcData(startTimestamp: number, endTimestamp: number) {
+export async function getSUSDeToCRVUSDOhlcData(startTimestamp: number, endTimestamp: number) {
      return await getCurveOhlcData({
         chain: "ethereum",
         poolAddress: "0x57064F49Ad7123C92560882a45518374ad982e85",

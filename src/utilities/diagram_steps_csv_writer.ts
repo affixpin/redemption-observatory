@@ -3,6 +3,7 @@ import path from "path";
 import { DiagramStep } from "../ohlc/types";
 
 const CSV_FILE_PATH = path.resolve("examples/diagram_steps.csv");
+const DEBUG_CSV_FILE_PATH = path.resolve("examples/debug.csv");
 
 export function appendDiagramStepsToCsv(steps: DiagramStep[]) {
   if (steps.length === 0) return;
@@ -53,4 +54,31 @@ export function appendDiagramStepsToCsv(steps: DiagramStep[]) {
   const content = (writeHeader ? headers.join(",") + "\n" : "") + rows.join("\n") + "\n";
 
   fs.appendFileSync(CSV_FILE_PATH, content, "utf8");
+}
+
+export function appendDiagramStepsToDebugCsv(steps: DiagramStep[]) {
+  if (steps.length === 0) return;
+
+  const headers = [
+    "timestamp",
+    "sUSDeToCrvUSDDex_open",
+    "sUSDeToCrvUSDDex_high",
+    "sUSDeToCrvUSDDex_low",
+    "sUSDeToCrvUSDDex_close"
+  ];
+
+  const rows = steps.map((step) =>
+    [
+      step.timestamp,
+      step.sUSDeToCrvUSDDex.open,
+      step.sUSDeToCrvUSDDex.high,
+      step.sUSDeToCrvUSDDex.low,
+      step.sUSDeToCrvUSDDex.close
+    ].join(",")
+  );
+
+  const writeHeader = !fs.existsSync(DEBUG_CSV_FILE_PATH);
+  const content = (writeHeader ? headers.join(",") + "\n" : "") + rows.join("\n") + "\n";
+
+  fs.appendFileSync(DEBUG_CSV_FILE_PATH, content, "utf8");
 }
