@@ -61,19 +61,19 @@ export function appendDiagramStepsToDebugCsv(steps: DiagramStep[]) {
 
   const headers = [
     "timestamp",
-    "dexsUSDeToCrvUSDC_open",
-    "dexsUSDeToCrvUSDC_high",
-    "dexsUSDeToCrvUSDC_low",
-    "dexsUSDeToCrvUSDC_close"
+    "dexsUSDeToCrvUSD_open",
+    "dexsUSDeToCrvUSD_high",
+    "dexsUSDeToCrvUSD_low",
+    "dexsUSDeToCrvUSD_close"
   ];
 
   const rows = steps.map((step) =>
     [
       step.timestamp,
-      step.dexsUSDeToCrvUSDC.open,
-      step.dexsUSDeToCrvUSDC.high,
-      step.dexsUSDeToCrvUSDC.low,
-      step.dexsUSDeToCrvUSDC.close
+      step.dexsUSDeToCrvUSD.open,
+      step.dexsUSDeToCrvUSD.high,
+      step.dexsUSDeToCrvUSD.low,
+      step.dexsUSDeToCrvUSD.close
     ].join(",")
   );
 

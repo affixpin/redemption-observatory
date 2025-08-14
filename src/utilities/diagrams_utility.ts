@@ -43,7 +43,7 @@ export function buildDiagramSteps(
         dexsUSDeToUSDC: dexMap.get(ts)!,
         dexcrvUSDToUSDC: crvMap.get(ts)!,
         dexUSDeToUSDC: usdeMap.get(ts)!,
-        dexsUSDeToCrvUSDC: sUSDeToCrvUSDDexMap.get(ts)!,
+        dexsUSDeToCrvUSD: sUSDeToCrvUSDDexMap.get(ts)!,
       });
     }
   
