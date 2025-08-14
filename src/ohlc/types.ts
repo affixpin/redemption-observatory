@@ -20,11 +20,11 @@ export type TimedRedemptionData = RedemptionData & {
 
 export type DiagramStep = {
     timestamp: number;
-    sUSDeToUSDCRedemption: OhlcData;
-    sUSDeToUSDCDex: OhlcData;
-    crvUSDToUSDCDex: OhlcData;
-    usdeToUSDCDex: OhlcData;
-    sUSDeToCrvUSDDex: OhlcData;
+    redemptionsUSDeToUSDC: OhlcData;
+    dexsUSDeToUSDC: OhlcData;
+    dexcrvUSDToUSDC: OhlcData;
+    dexUSDeToUSDC: OhlcData;
+    dexsUSDeToCrvUSDC: OhlcData;
 }
 
 export type BatchRedemptionPickingResult = {

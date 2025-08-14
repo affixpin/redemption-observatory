@@ -39,11 +39,11 @@ export function buildDiagramSteps(
     for (const ts of sharedTimestamps) {
       result.push({
         timestamp: ts,
-        sUSDeToUSDCRedemption: redemptionMap.get(ts)!,
-        sUSDeToUSDCDex: dexMap.get(ts)!,
-        crvUSDToUSDCDex: crvMap.get(ts)!,
-        usdeToUSDCDex: usdeMap.get(ts)!,
-        sUSDeToCrvUSDDex: sUSDeToCrvUSDDexMap.get(ts)!,
+        redemptionsUSDeToUSDC: redemptionMap.get(ts)!,
+        dexsUSDeToUSDC: dexMap.get(ts)!,
+        dexcrvUSDToUSDC: crvMap.get(ts)!,
+        dexUSDeToUSDC: usdeMap.get(ts)!,
+        dexsUSDeToCrvUSDC: sUSDeToCrvUSDDexMap.get(ts)!,
       });
     }
   

@@ -10,48 +10,48 @@ export function appendDiagramStepsToCsv(steps: DiagramStep[]) {
 
   const headers = [
     "timestamp",
-    "sUSDeToUSDCRedemption_open",
-    "sUSDeToUSDCRedemption_high",
-    "sUSDeToUSDCRedemption_low",
-    "sUSDeToUSDCRedemption_close",
-    "sUSDeToUSDCDex_open",
-    "sUSDeToUSDCDex_high",
-    "sUSDeToUSDCDex_low",
-    "sUSDeToUSDCDex_close",
-    "crvUSDToUSDCDex_open",
-    "crvUSDToUSDCDex_high",
-    "crvUSDToUSDCDex_low",
-    "crvUSDToUSDCDex_close",
-    "usdeToUSDCDex_open",
-    "usdeToUSDCDex_high",
-    "usdeToUSDCDex_low",
-    "usdeToUSDCDex_close"
+    "redemptionsUSDeToUSDC_open",
+    "redemptionsUSDeToUSDC_high",
+    "redemptionsUSDeToUSDC_low",
+    "redemptionsUSDeToUSDC_close",
+    "dexsUSDeToUSDC_open",
+    "dexsUSDeToUSDC_high",
+    "dexsUSDeToUSDC_low",
+    "dexsUSDeToUSDC_close",
+    "dexcrvUSDToUSDC_open",
+    "dexcrvUSDToUSDC_high",
+    "dexcrvUSDToUSDC_low",
+    "dexcrvUSDToUSDC_close",
+    "dexUSDeToUSDC_open",
+    "dexUSDeToUSDC_high",
+    "dexUSDeToUSDC_low",
+    "dexUSDeToUSDC_close"
   ];
 
   const rows = steps.map((step) =>
     [
       step.timestamp,
-      step.sUSDeToUSDCRedemption.open,
-      step.sUSDeToUSDCRedemption.high,
-      step.sUSDeToUSDCRedemption.low,
-      step.sUSDeToUSDCRedemption.close,
-      step.sUSDeToUSDCDex.open,
-      step.sUSDeToUSDCDex.high,
-      step.sUSDeToUSDCDex.low,
-      step.sUSDeToUSDCDex.close,
-      step.crvUSDToUSDCDex.open,
-      step.crvUSDToUSDCDex.high,
-      step.crvUSDToUSDCDex.low,
-      step.crvUSDToUSDCDex.close,
-      step.usdeToUSDCDex.open,
-      step.usdeToUSDCDex.high,
-      step.usdeToUSDCDex.low,
-      step.usdeToUSDCDex.close
+      step.redemptionsUSDeToUSDC.open,
+      step.redemptionsUSDeToUSDC.high,
+      step.redemptionsUSDeToUSDC.low,
+      step.redemptionsUSDeToUSDC.close,
+      step.dexsUSDeToUSDC.open,
+      step.dexsUSDeToUSDC.high,
+      step.dexsUSDeToUSDC.low,
+      step.dexsUSDeToUSDC.close,
+      step.dexcrvUSDToUSDC.open,
+      step.dexcrvUSDToUSDC.high,
+      step.dexcrvUSDToUSDC.low,
+      step.dexcrvUSDToUSDC.close,
+      step.dexUSDeToUSDC.open,
+      step.dexUSDeToUSDC.high,
+      step.dexUSDeToUSDC.low,
+      step.dexUSDeToUSDC.close
     ].join(",")
   );
 
-  const writeHeader = !fs.existsSync(CSV_FILE_PATH);
-  const content = (writeHeader ? headers.join(",") + "\n" : "") + rows.join("\n") + "\n";
+  const fileExists = fs.existsSync(CSV_FILE_PATH);
+  const content = (fileExists ? "" : headers.join(",") + "\n") + rows.join("\n") + "\n";
 
   fs.appendFileSync(CSV_FILE_PATH, content, "utf8");
 }
@@ -61,24 +61,24 @@ export function appendDiagramStepsToDebugCsv(steps: DiagramStep[]) {
 
   const headers = [
     "timestamp",
-    "sUSDeToCrvUSDDex_open",
-    "sUSDeToCrvUSDDex_high",
-    "sUSDeToCrvUSDDex_low",
-    "sUSDeToCrvUSDDex_close"
+    "dexsUSDeToCrvUSDC_open",
+    "dexsUSDeToCrvUSDC_high",
+    "dexsUSDeToCrvUSDC_low",
+    "dexsUSDeToCrvUSDC_close"
   ];
 
   const rows = steps.map((step) =>
     [
       step.timestamp,
-      step.sUSDeToCrvUSDDex.open,
-      step.sUSDeToCrvUSDDex.high,
-      step.sUSDeToCrvUSDDex.low,
-      step.sUSDeToCrvUSDDex.close
+      step.dexsUSDeToCrvUSDC.open,
+      step.dexsUSDeToCrvUSDC.high,
+      step.dexsUSDeToCrvUSDC.low,
+      step.dexsUSDeToCrvUSDC.close
     ].join(",")
   );
 
-  const writeHeader = !fs.existsSync(DEBUG_CSV_FILE_PATH);
-  const content = (writeHeader ? headers.join(",") + "\n" : "") + rows.join("\n") + "\n";
+  const fileExists = fs.existsSync(DEBUG_CSV_FILE_PATH);
+  const content = (fileExists ? "" : headers.join(",") + "\n") + rows.join("\n") + "\n";
 
   fs.appendFileSync(DEBUG_CSV_FILE_PATH, content, "utf8");
 }

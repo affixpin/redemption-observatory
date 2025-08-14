@@ -16,7 +16,6 @@ export async function getCurveOhlcData(options: {
         mainToken,
         referenceToken,
         aggNumber = "1",
-        aggUnits = "hour",
         start,
         end
     } = options;
@@ -27,7 +26,7 @@ export async function getCurveOhlcData(options: {
         main_token: mainToken,
         reference_token: referenceToken,
         agg_number: aggNumber,
-        agg_units: aggUnits,
+        agg_units: "day",
         start: String(start),
         end: String(end),
     };

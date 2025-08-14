@@ -5,8 +5,8 @@ const RPC_BLOCKS = "https://nd-422-757-666.p2pify.com/0a9d79d93fb2f4a4b1e04695da
 const RPC_MAINNET = "https://ethereum-mainnet.core.chainstack.com/7541f180988ffa697ec13762ba5d988f"; 
 const SUSDE_REDEMPTION_CONTRACT = "0x9D39A5DE30e57443BfF2A8307A4256c8797A3497";
 const CALL_DATA ="0x4cdad5060000000000000000000000000000000000000000000000000de0b6b3a7640000";
-const BATCH_SIZE = 2;     
-const BLOCK_INTERVAL = 50; 
+const BATCH_SIZE = 3;     
+const BLOCK_INTERVAL = 100; 
 const RPC_TIMEOUT_MS = 30_000;
 
 export async function getLatestBlock() : Promise<number> {
